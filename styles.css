@@ -22,6 +22,29 @@ body, a:link, a:visited, a:active{
 }
 .dancer{
   border:10px solid red;
+  height: 40px;
+  width: 40px;
   border-radius:10px;
   position:absolute;
 }
+
+.breakdancer-frame-0{
+  background-color: red;
+}
+
+.breakdancer-frame-1{
+  background-color: blue;
+}
+
+.breakdancer-frame-2{
+  background-color: green;
+}
+
+.breakdancer-frame-3{
+  background-color: yellow;
+}
+
+.breakdancer-frame-4{
+  background-color: purple;
+}
+
