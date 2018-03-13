@@ -8,6 +8,9 @@ var BreakDancer = function(top, left, timeBetweenSteps) {
   this.lineUpPosition = '400px';
 
   Dancer.call(this, top, left, timeBetweenSteps);
+  $(this.$node).on('click', function(event) {
+    window.targetNode = this;
+  });
 };
 
 BreakDancer.prototype = Object.create(Dancer.prototype);

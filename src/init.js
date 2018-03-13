@@ -2,8 +2,9 @@ $(document).ready(function() {
   window.blinkydancers = [];
   window.morphdancers = [];
   window.breakdancers = [];
+  window.interactingdancers = [];
   window.dancerState = 'random';
-  window.stalkingNode;
+  window.targetNode;
 
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -29,8 +30,9 @@ $(document).ready(function() {
     var dancer = new dancerMakerFunction(
       $("body").height() * Math.random(),
       $("body").width() * Math.random(),
-      Math.random() * 1000
+      100
     );
+
     if (dancerMakerFunctionName === 'BlinkyDancer') {
       window.blinkydancers.push(dancer);
     }
@@ -40,12 +42,18 @@ $(document).ready(function() {
     if (dancerMakerFunctionName === 'MorphDancer') {
       window.morphdancers.push(dancer);
     }
+    if (dancerMakerFunctionName === 'InteractingDancer') {
+      window.interactingdancers.push(dancer);
+    }
+
     $('body').append(dancer.$node);
+    console.log(dancer.$node.offset());
 
     if (window.dancerState === 'lined') {
       lineUpDancerGroup(window.blinkydancers);
       lineUpDancerGroup(window.breakdancers);
       lineUpDancerGroup(window.morphdancers);
+      lineUpDancerGroup(window.interactingdancers);
     }  
   });
   
@@ -61,17 +69,7 @@ $(document).ready(function() {
     lineUpDancerGroup(window.blinkydancers);
     lineUpDancerGroup(window.breakdancers);
     lineUpDancerGroup(window.morphdancers);
+    lineUpDancerGroup(window.interactingdancers);
   });
-
-  $('.dancer').on('click', function(event) {
-    if (this instanceof InteractingDancer) {
-      window.stalkingNode = this;
-    } else {
-      if (window.stalkingNode) {
-        stalkingNode.setTarget(this);
-      }
-    }
-  });
-
 });
 
