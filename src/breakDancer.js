@@ -1,10 +1,13 @@
 var BreakDancer = function(top, left, timeBetweenSteps) {
-  Dancer.call(this, top, left, timeBetweenSteps);
+  // Dancer.call(this, top, left, timeBetweenSteps);
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
   this.frames = ["red", "blue", "green", "yellow", "purple"];
   this.frameCounter = 0; 
   this.frameLimit = 5;
+  this.lineUpPosition = '400px';
+
+  Dancer.call(this, top, left, timeBetweenSteps);
 };
 
 BreakDancer.prototype = Object.create(Dancer.prototype);
@@ -16,11 +19,16 @@ BreakDancer.prototype.step = function() {
   // toggle() is a jQuery method to show/hide the <span> tag.
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
-  //var color = frames[this.frameCounter];
-  var color = 'red';
+  var color = this.frames[this.frameCounter];
   this.$node.css({"backgroundColor": `${color}`,});
-  if (frameCounter === frameLimit-1) {
-    frameCounter = 0;
+
+  this.frameCounter++;
+  
+  if (this.frameCounter === this.frameLimit) {
+    this.frameCounter = 0;
   }
-  frameCounter++;
+};
+
+BreakDancer.prototype.lineUp = function(topPos) {
+  Dancer.prototype.lineUp.call(this, topPos);
 };
