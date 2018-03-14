@@ -1,7 +1,7 @@
 var MorphDancer = function(top, left, timeBetweenSteps) {
-  this.frames = ['10px', '30px', '50px', '60px', '80px','60px', '50px', '30px', '10px', '1px' ];
+  this.frames = ['150px', '170px', '190px', '210px', '230px','210px', '190px', '170px', '150px'];
   this.frameCount = 0;
-  this.frameLimit = 10;
+  this.frameLimit = 9;
   this.lineUpPosition = '200px';
 
   Dancer.call(this, top, left, timeBetweenSteps);
@@ -10,6 +10,8 @@ var MorphDancer = function(top, left, timeBetweenSteps) {
   $(this.$node).on('click', function(event) {
     window.targetNode = this;
   });
+
+  $(this.$node).children().attr('src', 'https://media.giphy.com/media/RyAuIdvXOugUw/giphy.gif');
 };
 
 MorphDancer.prototype = Object.create(Dancer.prototype);
@@ -22,7 +24,7 @@ MorphDancer.prototype.step = function() {
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
   var randNum = (Math.random() * Math.floor(this.frames.length));
-  this.$node.css({width: `${this.frames[this.frameCount]}`});
+  this.$node.css({width: `${this.frames[this.frameCount]}`, height: `${this.frames[this.frameCount]}`});
   this.frameCount++;
   if(this.frameCount === this.frameLimit) {
     this.frameCount = 0;

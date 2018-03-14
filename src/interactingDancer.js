@@ -6,6 +6,7 @@ var InteractingDancer = function(top, left, timeBetweenSteps) {
   this.lineUpPosition = '800px';
   this.state = this.states[0];
   this.target;
+  this.orbitTime;
 
   Dancer.call(this, top, left, timeBetweenSteps);
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
@@ -16,6 +17,8 @@ var InteractingDancer = function(top, left, timeBetweenSteps) {
       instance.setTarget(window.targetNode);
     }
   });
+  
+  $(this.$node).children().attr('src', 'https://thumbs.gfycat.com/BoldConsiderateAndeancockoftherock-max-1mb.gif');
 
 };
 
@@ -60,17 +63,30 @@ InteractingDancer.prototype.step = function() {
   };
 
   var orbit = function() {
-
+    var t = (Date.now() - this.orbitTime)/1000;
+    var r = 150;
+    var targetPosition = $(this.target).position();
+    var targetY = targetPosition.top;
+    var targetX = targetPosition.left;
+    var newLeft = Math.floor(targetX + (r * Math.cos(t)));
+    var newTop = Math.floor(targetY + (r * Math.sin(t)));
+    this.setPosition(newTop, newLeft);
   };
+
   if (this.state === this.states[0] && this.target) {
     var distance = getDistance.call(this);
     if (distance > 150) {
       moveStraight.call(this);
-    } 
+    } else {
+      this.state = this.states[1];
+    }
   } 
 
   if (this.state === this.states[1]) {
-    orbit();  
+    if (!this.orbitTime) {
+      this.orbitTime = Date.now();
+    }
+    orbit.call(this);  
   }
   // var randNum = (Math.random() * Math.floor(this.frames.length));
   // this.$node.css({width: `${this.frames[randNum]}`});
@@ -78,7 +94,6 @@ InteractingDancer.prototype.step = function() {
   // if(this.frameCount === this.frameLimit) {
   //   this.frameCount = 0;
   // }
-  console.log($(this.$node).position());
 };
 
 InteractingDancer.prototype.setTarget = function(target) {
@@ -88,4 +103,8 @@ InteractingDancer.prototype.setTarget = function(target) {
 InteractingDancer.prototype.lineUp = function(topPos) {
   this.state = this.states[2];
   Dancer.prototype.lineUp.call(this, topPos);
+};
+
+InteractingDancer.prototype.reset = function() {
+  this.state = this.states[0];
 };

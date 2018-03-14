@@ -47,7 +47,7 @@ $(document).ready(function() {
     }
 
     $('body').append(dancer.$node);
-    console.log(dancer.$node.offset());
+    
 
     if (window.dancerState === 'lined') {
       lineUpDancerGroup(window.blinkydancers);
@@ -59,7 +59,7 @@ $(document).ready(function() {
   
   var lineUpDancerGroup = function(dancers) {
     for (var i = 0; i < dancers.length; i++) {
-      dancers[i].lineUp(i * 70);
+      dancers[i].lineUp(i * 30);
     }
   };
 
@@ -70,6 +70,24 @@ $(document).ready(function() {
     lineUpDancerGroup(window.breakdancers);
     lineUpDancerGroup(window.morphdancers);
     lineUpDancerGroup(window.interactingdancers);
+  });
+
+  var disperseDancerGroup = function(dancers) {
+    var isInteractingDancer = dancers[0] instanceof InteractingDancer;
+    for (var i = 0; i < dancers.length; i++) {
+      dancers[i].setPosition($("body").height() * Math.random(), $("body").width() * Math.random());
+      if (isInteractingDancer) {
+        dancers[i].reset();
+      }
+    }
+  };
+
+  $('#chaosmode').on('click', function(event) {
+    window.dancerState = 'random';
+    disperseDancerGroup(window.blinkydancers);
+    disperseDancerGroup(window.breakdancers);
+    disperseDancerGroup(window.morphdancers);
+    disperseDancerGroup(window.interactingdancers);
   });
 });
 
