@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Mocha Spec Runner</title>
+  <link rel="stylesheet" href="lib/mocha/mocha.css">
+  <script src="lib/jquery.js"></script>
+  <script src="lib/mocha/mocha.js"></script>
+  <script src="lib/chai/chai.js"></script>
+  <script src="lib/sinon/sinon.js"></script>
+  <script>
+    mocha.setup('bdd');
+    window.expect = chai.expect;
+    $(function() {
+      window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
+    });
+  </script>
+  <script src="spec/es6blinkyDancerSpec.js"></script>
+  <script src="spec/es6breakDancerSpec.js"></script>
+  <script src="spec/es6morphDancerSpec.js"></script>
+  <script src="src/es6dancer.js"></script>
+  <script src="src/es6blinkyDancer.js"></script>
+  <script src="src/es6breakDancer.js"></script>
+  <script src="src/es6morphDancer.js"></script>
+</head>
+<body>
+<div id="mocha"></div>
+</body>
+</html>

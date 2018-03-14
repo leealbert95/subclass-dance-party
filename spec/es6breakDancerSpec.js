@@ -1,15 +1,15 @@
-describe('blinkyDancer', function() {
+describe('breakDancer', function() {
 
-  var blinkyDancer, clock;
+  var breakDancer, clock;
   var timeBetweenSteps = 100;
 
   beforeEach(function() {
     clock = sinon.useFakeTimers();
-    blinkyDancer = new BlinkyDancer(10, 20, timeBetweenSteps);
+    breakDancer = new BreakDancer(10, 20, timeBetweenSteps);
   });
 
   it('should have a jQuery $node object', function() {
-    expect(blinkyDancer.$node).to.be.an.instanceof(jQuery);
+    expect(breakDancer.$node).to.be.an.instanceof(jQuery);
   });
 
   it('should have a step function that changes its frame counter', function() {
@@ -21,15 +21,14 @@ describe('blinkyDancer', function() {
 
   describe('dance', function() {
     it('should call step at least once per second', function() {
-      sinon.spy(blinkyDancer, 'step');
-      expect(blinkyDancer.step.callCount).to.be.equal(0);
+      sinon.spy(breakDancer, 'step');
+      expect(breakDancer.step.callCount).to.be.equal(0);
       clock.tick(timeBetweenSteps); // ? it seems an extra tick is necessary...
-      clock.tick(timeBetweenSteps);
 
-      expect(blinkyDancer.step.callCount).to.be.equal(1);
+      expect(breakDancer.step.callCount).to.be.equal(1);
 
       clock.tick(timeBetweenSteps);
-      expect(blinkyDancer.step.callCount).to.be.equal(2);
+      expect(breakDancer.step.callCount).to.be.equal(2);
     });
   });
 });

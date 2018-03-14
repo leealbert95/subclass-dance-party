@@ -1,6 +1,6 @@
 var MorphDancer = function(top, left, timeBetweenSteps) {
   this.frames = ['150px', '170px', '190px', '210px', '230px','210px', '190px', '170px', '150px'];
-  this.frameCount = 0;
+  this.frameCounter = 0;
   this.frameLimit = 9;
   this.lineUpPosition = '200px';
 
@@ -24,13 +24,14 @@ MorphDancer.prototype.step = function() {
   // See http://api.jquery.com/category/effects/ for this and
   // other effects you can use on a jQuery-wrapped html tag.
   var randNum = (Math.random() * Math.floor(this.frames.length));
-  this.$node.css({width: `${this.frames[this.frameCount]}`, height: `${this.frames[this.frameCount]}`});
-  this.frameCount++;
-  if(this.frameCount === this.frameLimit) {
-    this.frameCount = 0;
+  this.$node.css({width: `${this.frames[this.frameCounter]}`, height: `${this.frames[this.frameCounter]}`});
+  this.frameCounter++;
+  if(this.frameCounter === this.frameLimit) {
+    this.frameCounter = 0;
   }
 };
 
 MorphDancer.prototype.lineUp = function(topPos) {
   Dancer.prototype.lineUp.call(this, topPos);
 };
+

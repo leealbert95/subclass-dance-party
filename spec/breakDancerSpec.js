@@ -12,10 +12,11 @@ describe('breakDancer', function() {
     expect(breakDancer.$node).to.be.an.instanceof(jQuery);
   });
 
-  it('should have a step function that makes its node blink', function() {
-    sinon.spy(breakDancer.$node, 'toggle');
+  it('should have a step function that changes its frame counter', function() {
+    var oldCounter = breakDancer.frameCounter;
     breakDancer.step();
-    expect(breakDancer.$node.toggle.called).to.be.true;
+    var newCounter = breakDancer.frameCounter;
+    expect(newCounter === oldCounter).to.be.false;
   });
 
   describe('dance', function() {
